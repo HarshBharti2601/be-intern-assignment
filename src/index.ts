@@ -1,6 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { userRouter } from './routes/user.routes';
+import { postRouter } from './routes/post.route';
+import { likeRouter } from './routes/like.route';
+import { followRouter } from './routes/follow.route';
+import { hashtagRouter } from './routes/hashtag.route';
 import { AppDataSource } from './data-source';
 
 dotenv.config();
@@ -21,6 +25,10 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', userRouter);
+app.use('/api/posts', postRouter);
+app.use('/api/likes', likeRouter);
+app.use('/api/follows', followRouter);
+app.use('/api/hashtags', hashtagRouter);
 
 const PORT = process.env.PORT || 3000;
 
