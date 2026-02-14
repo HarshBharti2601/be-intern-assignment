@@ -6,11 +6,14 @@ import {
   UpdateDateColumn,
   ManyToOne,
   OneToMany,
+  ManyToMany,
+  JoinTable,
   JoinColumn,
   Index,
 } from 'typeorm';
 import { User } from './User';
 import { Like } from './Like';
+import { Hashtag } from './Hashtag';
 
 @Entity('posts')
 @Index('idx_post_author', ['authorId'])
@@ -37,4 +40,12 @@ export class Post {
 
   @OneToMany(() => Like, (like) => like.post, { cascade: true })
   likes: Like[];
+
+  @ManyToMany(() => Hashtag, (hashtag) => hashtag.posts)
+  @JoinTable({
+    name: 'post_hashtags',
+    joinColumn: { name: 'postId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'hashtagId', referencedColumnName: 'id' },
+  })
+  hashtags: Hashtag[];
 }
