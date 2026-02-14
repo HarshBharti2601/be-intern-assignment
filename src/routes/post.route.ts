@@ -6,6 +6,10 @@ import {PostController} from '../controllers/post.controller';
 export const postRouter = Router();
 const postController = new PostController();
 
+postRouter.get('/feed',postController.getFeed.bind(postController));
+
+postRouter.get('/hashtag/:tag',postController.getPostsByHashtag.bind(postController));
+
 postRouter.get('/',postController.getAllPosts.bind(postController));
 
 postRouter.post('/',validate(createPostSchema),postController.createPost.bind(postController));
@@ -16,6 +20,3 @@ postRouter.get('/:id', postController.getPostById.bind(postController));
 
 postRouter.delete('/:id',postController.deletePost.bind(postController));
 
-postRouter.get('/feed',postController.getFeed.bind(postController));
-
-postRouter.get('/hashtag/:tag',postController.getPostsByHashtag.bind(postController));
