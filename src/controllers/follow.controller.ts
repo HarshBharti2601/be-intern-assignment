@@ -32,7 +32,7 @@ export class FollowController {
       const followId = parseInt(req.params.id);
 
       const follow = await this.followRepository.findOne({
-        where: { id: followId.toString() },
+        where: { id: followId },
         relations: ['follower', 'followingUser'],
       });
 
@@ -92,7 +92,7 @@ export class FollowController {
     try {
       const followId = parseInt(req.params.id);
 
-      const follow = await this.followRepository.findOneBy({ id: followId.toString()});
+      const follow = await this.followRepository.findOneBy({ id: followId});
 
       if (!follow) {
         return res.status(404).json({ message: 'Follow not found' });

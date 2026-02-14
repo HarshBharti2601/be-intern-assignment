@@ -15,8 +15,8 @@ import { User } from './User';
 @Index('idx_follow_following', ['followingId'])
 @Index('idx_follow_follower', ['followerId'])
 export class Follow {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
   @Column({ type: 'uuid' })
   followerId: string;

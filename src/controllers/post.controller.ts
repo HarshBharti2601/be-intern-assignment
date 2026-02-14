@@ -39,6 +39,12 @@ async getPostById(req: Request, res: Response){
   try {
     const { id } = req.params;
 
+    if (isNaN(parseInt(id))){
+        return res.status(400).json({
+          message: 'Post ID must be a valid number'
+        });
+      }
+
     const post = await this.postRepository.findOne({
       where: { id: parseInt(id) },
       relations: ['author', 'likes', 'hashtags'],
